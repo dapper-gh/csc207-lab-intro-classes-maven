@@ -6,7 +6,7 @@ import java.math.BigInteger;
  * A simple implementation of arbitrary-precision Fractions.
  *
  * @author Samuel A. Rebelsky
- * @author YOUR NAME HERE
+ * @author David, Moses
  */
 public class BigFraction {
   // +------------------+---------------------------------------------
@@ -86,8 +86,9 @@ public class BigFraction {
    *   The fraction in string form
    */
   public BigFraction(String str) {
-    this.num = DEFAULT_NUMERATOR;
-    this.denom = DEFAULT_DENOMINATOR;
+    int slash = str.indexOf("/");
+    this.num = BigInteger.valueOf(Long.parseLong(str.substring(0, slash)));
+    this.denom = BigInteger.valueOf(Long.parseLong(str.substring(slash + 1)));
   } // BigFraction
 
   // +---------+------------------------------------------------------
@@ -160,4 +161,22 @@ public class BigFraction {
     // return this.num.toString().concat("/").concat(this.denom.toString());
     return this.num + "/" + this.denom;
   } // toString()
+
+  /**
+   * Multiply this fraction by another fraction.
+   * 
+   * @return The multiplied fraction.
+   */
+  public BigFraction multiply(BigFraction other) {
+    return new BigFraction(this.numerator().multiply(other.numerator()), this.denominator().multiply(other.denominator()));
+  } // multiply(BigFraction)
+
+  /**
+   * Returns the fractional portion of this fraction as a mixed number.
+   * 
+   * @return The fractional portion.
+   */
+  public BigFraction fractional() {
+    return new BigFraction(this.numerator().subtract(this.numerator().divide(this.denominator()).multiply(this.denominator())), this.denominator());
+  } // fractional()
 } // class BigFraction

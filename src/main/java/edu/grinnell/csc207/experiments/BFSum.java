@@ -8,7 +8,7 @@ import java.io.PrintWriter;
  * Sum all the fractions provided on the command line.
  *
  * @author Samuel A. Rebelsky.
- * @author YOUR NAME HERE
+ * @author David and Moses
  */
 public class BFSum {
   /**
